@@ -3,125 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
-    <title>Samourai Fighter</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: "Dela Gothic One", serif;
-            overflow: auto;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;zdqzd
-            margin: 0;
-            background-color: #121212;
-            color: white;
-        }
-        canvas {
-            border: 4px solid #ede9fe;
-            border-radius: 15px;
-            box-shadow: 0 2px 3px #4f46e5
-        }
-        .controls {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-        }
-        .controls ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .controls li {
-            margin: 5px 0;
-        }
-        .restart-button {
-            margin-top: 50px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #6366f1;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            color: white;
-            transition: 300ms;
-            box-shadow: 0 5px 3px #4f46e5;
-        }
-        .restart-button:hover {
-            background-color: #4f46e5;
-            box-shadow: 0 5px 3px #4338ca;
-        }
-        #displayText {
-            position: absolute;
-            font-size: 50px;
-            color: white;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            animation: popOut 1s ease-out forwards;
-        }
-        @keyframes popOut {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"></link>
+    <title>Document</title>
 </head>
 <body>
-    <div style="position: relative; display: inline-block;">
-        <div style="position: absolute; display: flex; width: 100%; align-items: center; padding: 20px;">
-            <!-- PLAYER HEALTH -->
-            <div style="position: relative; width: 100%; display: flex; justify-content: flex-end; border-top: 4px solid #ede9fe; border-left: 4px solid #ede9fe; border-bottom: 4px solid #ede9fe; border-radius: 15px;">
-                <div style="background-color: #b91c1c; height: 30px; width: 100%; border-radius: 12px;"></div>
-                <div id="playerHealth" style="transition: 300ms; position: absolute; background:#818cf8; top: 0; right: 0; bottom: 0; width: 100%; border-radius: 12px;"></div>
-            </div>
-            <!-- TIMER -->
-            <div id="timer" style="background-color: black; width: 100px; height: 50px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; border: 4px solid #ede9fe; border-radius: 15px;">10</div>
-            <!-- ENEMY HEALTH -->
-            <div style="position: relative; width: 100%; border-top: 4px solid #ede9fe; border-right: 4px solid #ede9fe; border-bottom: 4px solid #ede9fe; border-radius: 15px;">
-                <div style="background-color: #b91c1c; height: 30px; border-radius: 12px;"></div>
-                <div id="enemyHealth" style="transition: 300ms; position: absolute; background:#818cf8; top: 0; right: 0; bottom: 0; left: 0; border-radius: 12px;"></div>
-            </div>
-        </div>
-        <div id="displayText" style="position: absolute; font-size: 50px; color: white; display: none; align-items: center; justify-content: center; top: 0; left: 0; right: 0; bottom: 0;"></div>
-        <canvas width="800" height="600"></canvas>
-    </div>
-    <button class="restart-button" onclick="location.reload()">Restart Game</button>
-    <div class="controls">
-        <ul>
-            <li style="text-shadow: 0 3px 3px #e11d48;">Player 1 Controls:</li>
-            <li>Z (Up)</li>
-            <li>Q (Left)</li>
-            <li>D (Right)</li>
-            <li>F (Attack)</li>
-        </ul>
-        <ul>
-            <li style="text-shadow: 0 3px 3px #1e40af;">Player 2 Controls:</li>
-            <li>Arrow Up (Up)</li>
-            <li>Arrow Left (Left)</li>
-            <li>Arrow Right (Right)</li>
-            <li>, (Attack)</li>
-        </ul>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="js/utils.js"></script>
-    <script src="js/classes.js"></script>
-    <script src="index.js"></script>
+    <h1>SAMOURAI</h1>
+<div><p>> <span>CREATOR</span>: "<i>Welcom to Samourai Fighter</i>"</p>
+<p>> <span>you want to play?</span>: <a class="start" href="game.html">START</a></p>
+<p>> <span>GAME DESCRIPTION</span>:<b>a 2D PvP 1v1 fighting game where two samurais battle using special attacks and strategic movements. The goal is to reduce the opponent's health bar by landing powerful strikes while dodging enemy attacks.</b></p>
+<p>> <span>PERMISSION TO ACCESS</span>: yes.</p>
+</div>
+<script src="script.js">
+
+</script>
 </body>
 </html>
+

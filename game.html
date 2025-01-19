@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Terminal Style</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            box-sizing: border-box;
+            color: inherit;
+        }
+
+        body {
+            font-family: "Share Tech Mono", monospace;
+            background-color: #000000;
+            color: #00ff00;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            min-height: 100vh; /* Ensure the body takes the full height of the viewport */
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+
+        canvas {
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            background: #000;
+            z-index: 1;
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            z-index: 2;
+        }
+
+        .controls ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .controls li {
+            margin: 5px 0;
+        }
+
+        .restart-button, .home-button {
+            margin-top: 50px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #000;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            cursor: pointer;
+            transition: 300ms;
+            box-shadow: 0 0 10px #00ff00;
+            z-index: 2;
+            border-radius: 10px;
+        }
+
+        .restart-button:hover, .home-button:hover {
+            background-color: #00ff00;
+            color: #000;
+            box-shadow: 0 0 20px #00ff00;
+        }
+
+        #displayText {
+            position: absolute;
+            background-color: #0000007b;
+            font-size: 50px;
+            font-weight: bold;
+            color: #00ff00;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+            animation: popOut 1s ease-out forwards;
+            z-index: 3;
+        }
+
+        @keyframes popOut {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .controls li:first-child {
+            color: yellow;
+            animation: clignote 1s infinite;
+        }
+
+        @keyframes clignote {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent to allow gameplay visibility */
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 10px;
+            }
+
+            canvas {
+                width: 100%;
+                height: auto;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .controls ul {
+                margin-bottom: 20px;
+            }
+
+            .restart-button, .home-button {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            #displayText {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+        <div style="position: absolute; display: flex; width: 100%; align-items: center; padding: 20px; z-index: 2;">
+            <!-- PLAYER HEALTH -->
+            <div style="position: relative; width: 100%; display: flex; justify-content: flex-end; border: 2px solid #00ff00;">
+                <div style="background-color: #b91c1c; height: 30px; width: 100%; border-radius: 5px;"></div>
+                <div id="playerHealth" style="transition: 300ms; position: absolute; background: #00ff00; top: 0; right: 0; bottom: 0; width: 100%; border-radius: 5px;"></div>
+            </div>
+            <!-- TIMER -->
+            <div id="timer" style="background-color: #000; width: 100px; height: 50px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: #00ff00; border: 2px solid #00ff00;">10</div>
+            <!-- ENEMY HEALTH -->
+            <div style="position: relative; width: 100%; border: 2px solid #00ff00;">
+                <div style="background-color: #b91c1c; height: 30px; border-radius: 5px;"></div>
+                <div id="enemyHealth" style="transition: 300ms; position: absolute; background: #00ff00; top: 0; right: 0; bottom: 0; left: 0; border-radius: 5px;"></div>
+            </div>
+        </div>
+        <span id="displayText" ></span>
+        <canvas width="800" height="600"></canvas>
+    </div>
+    <button class="restart-button" onclick="location.reload()"><i class="fa-solid fa-arrow-rotate-right"></i></button>
+    <button class="home-button" onclick="window.location.href='index.html'"><i class="fa-solid fa-house-crack"></i></button>
+    <div class="controls">
+        <ul>
+            <li>Player 1 Controls:</li>
+            <li>Z (Up)</li>
+            <li>Q (Left)</li>
+            <li>D (Right)</li>
+            <li>V (Attack)</li>
+        </ul>
+        <ul>
+            <li>Player 2 Controls:</li>
+            <li>&uarr; (Up)</li>
+            <li>&larr; (Left)</li>
+            <li>&rarr; (Right)</li>
+            <li>! (Attack)</li>
+        </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js" integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/classes.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

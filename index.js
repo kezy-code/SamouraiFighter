@@ -288,7 +288,7 @@ window.addEventListener('keydown', (event) => {
             player.velocity.y = - 12
             player.lastKey = 'z'
             break
-        case 'f':
+        case 'v':
             player.attack()
             break
     }}
@@ -309,7 +309,7 @@ window.addEventListener('keydown', (event) => {
             enemy.velocity.y = - 12
             enemy.lastKey = 'ArrowUp'
             break
-        case ',':
+        case '!':
             enemy.attack()
             break
     }}
